@@ -1,6 +1,9 @@
 package com.driver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,7 +11,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@AllArgsConstructor
+@Builder
+@Data
 public class Student {
+
+    public Student(String emailId, String name, int age, String country) {
+        this.emailId = emailId;
+        this.name = name;
+        this.age = age;
+        this.country = country;
+    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +30,11 @@ public class Student {
 
     @Column(unique = true)
     private String emailId;
+    @Column
     private String name;
+    @Column
     private int age; // in case we want to check on the basis of age while issuing
-
+    @Column
     private String country;
 
     public Student() {
@@ -31,10 +47,10 @@ public class Student {
     @JsonIgnoreProperties("student")
     private Card card;
 
-
+    @Column
     @CreationTimestamp
     private Date createdOn;
-
+    @Column
     @UpdateTimestamp
     private Date updatedOn;
 

@@ -1,6 +1,9 @@
 package com.driver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +11,9 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@Builder
 @Entity
 public class Card {
 
@@ -19,9 +25,10 @@ public class Card {
     @JsonIgnoreProperties("card")
     private Student student;
 
+    @Column
     @CreationTimestamp
     private Date createdOn;
-
+    @Column
     @UpdateTimestamp
     private Date updatedOn;
 
@@ -33,6 +40,7 @@ public class Card {
     private List<Book> books;
 
     public Card(){
+
         this.cardStatus = CardStatus.ACTIVATED;
     }
 }
